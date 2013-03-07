@@ -21,6 +21,20 @@ public void readTheAccountNumberFileSuccess() throws URISyntaxException, IOExcep
 	assertEquals("Expected characters in the secoend line is","| || || || || || || || || |",fileReader.getAccountNumbers().get(0).getLine2());
 	assertEquals("Expected characters in the third line is",  "|_||_||_||_||_||_||_||_||_|",fileReader.getAccountNumbers().get(0).getLine3());
 }
+@Test
+public void readTheAccountNumberFileContainMultipleAccountNumberSuccess() throws URISyntaxException, IOException {
+	ClassLoader loader = AccountNumberFileReaderTest.class.getClassLoader();
+	URL url =loader.getResource("fileReaderMultipleAccountNumberTest.txt");
+	AccountFileReader fileReader = new AccountFileReader(url);
+	assertEquals("Expected one line data is read from the file ", 2, fileReader.getAccountNumbers().size());
+	assertEquals("Expected characters in the first line is",  " _  _  _  _  _  _  _  _  _ ",fileReader.getAccountNumbers().get(0).getLine1());
+	assertEquals("Expected characters in the secoend line is","| || || || || || || || || |",fileReader.getAccountNumbers().get(0).getLine2());
+	assertEquals("Expected characters in the third line is",  "|_||_||_||_||_||_||_||_||_|",fileReader.getAccountNumbers().get(0).getLine3());
+	
+	assertEquals("Expected characters in the first line is",  "    _  _     _  _  _  _  _ ",fileReader.getAccountNumbers().get(1).getLine1());
+	assertEquals("Expected characters in the secoend line is","  | _| _||_||_ |_   ||_||_|",fileReader.getAccountNumbers().get(1).getLine2());
+	assertEquals("Expected characters in the third line is",  "  ||_  _|  | _||_|  ||_| _|",fileReader.getAccountNumbers().get(1).getLine3());
+}
 
 @Test(expected = FileNotFoundException.class)
 public void readTheAccountNumberFileFailure() throws URISyntaxException, IOException {

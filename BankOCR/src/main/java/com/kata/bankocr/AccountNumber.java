@@ -6,21 +6,6 @@ public class AccountNumber {
 	private String line2;
 	private String line3;
 	
-	private enum AccountNumberDefinition {
-		ZERO("1101111",0)
-		
-		
-		private AccountNumber
-	}
-	private static final String ZERO = "1101111";
-	private static final String NINE = "1111011";
-	private static final String EIGHT = "1111111";
-	private static final String SEVEN = "1001001";
-	
-	public String parseToString() {
-		return AccountNumberParser.ConvertAccountNumberToString(this);
-		
-	}
 	public String getLine1() {
 		return line1;
 	}
@@ -33,11 +18,40 @@ public class AccountNumber {
 		return line3;
 	}
 
-	
-	public AccountNumber() {
+	private AccountNumber() {
 		
 	}
 	
+	public String parseToString() {
+		return AccountNumberParser.ConvertAccountNumberToString(this);
+		
+	}
+	
+	public boolean isaValidAccountNumber() {
+		String accountNumber = this.parseToString();
+		boolean isValid = false;
+		if(accountNumber.length() == 9 && accountNumberCheckSum(accountNumber) == 0) {
+			isValid = true;
+		}
+		return isValid;
+		
+	}
+	
+	public static int accountNumberCheckSum(String accountNumber) {
+		char[] cAccNumber = accountNumber.toCharArray();
+		int checkSum = (Character.getNumericValue(cAccNumber[8])+
+						(2*Character.getNumericValue(cAccNumber[7]))+
+						(3*Character.getNumericValue(cAccNumber[6]))+
+						(4*Character.getNumericValue(cAccNumber[5]))+
+						(5*Character.getNumericValue(cAccNumber[4]))+
+						(6*Character.getNumericValue(cAccNumber[3]))+
+						(7*Character.getNumericValue(cAccNumber[2]))+
+						(8*Character.getNumericValue(cAccNumber[1]))+
+						(9*Character.getNumericValue(cAccNumber[0])))% 11;
+		
+		return checkSum;
+	}
+
 	private AccountNumber (Builder builder) {
 		this.line1 = builder.line1;
 		this.line2 = builder.line2;
