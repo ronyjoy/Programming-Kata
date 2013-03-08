@@ -23,7 +23,7 @@ public class AccountNumber {
 	}
 	
 	public String parseToString() {
-		return AccountNumberParser.ConvertAccountNumberToString(this);
+		return DigitalAccountNumberParser.ConvertAccountNumberToString(this);
 		
 	}
 	
@@ -83,10 +83,6 @@ public class AccountNumber {
 			return new AccountNumber(this);
 		}
 		
-		
-		
-		
-	
 	}
 
 }
