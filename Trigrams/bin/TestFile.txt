@@ -1,0 +1,1 @@
+This is test file used to test the file channel reader and createTrigramFromTheFile.
